@@ -1,0 +1,26 @@
+﻿@model inventario_ferreteria_cliente.Models.ArticuloViewModel
+
+@{
+    ViewData["Title"] = "Buscar Artículo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center mb-4">Buscar Artículo por Código</h1>
+
+<form asp-action="Buscar" method="post" class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text" name="codigo" class="form-control" placeholder="Ingrese el código del artículo" />
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </div>
+</form>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.Mensaje
+    </div>
+}
