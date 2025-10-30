@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ServiceModel;
 using inventario_ferreteria_cliente.Models;
-using ServicioArticuloReference; // 👈 tu espacio de nombres generado
+using ServicioArticuloReference;
 
 namespace inventario_ferreteria_cliente.Controllers
 {
@@ -10,7 +11,12 @@ namespace inventario_ferreteria_cliente.Controllers
 
         public ArticulosController()
         {
-            _client = new ServicioArticulosClient();
+            var binding = new BasicHttpBinding
+            {
+                SendTimeout = TimeSpan.FromMinutes(5),
+                ReceiveTimeout = TimeSpan.FromMinutes(5)
+            };
+            _client = new ServicioArticulosClient(binding, new EndpointAddress("http://10.164.184.45:7208/Service.svc"));
         }
 
         // Página principal
